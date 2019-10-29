@@ -1,0 +1,34 @@
+apiVersion: appsody.dev/v1beta1
+kind: AppsodyApplication
+metadata:
+  name: quote-backend
+spec:
+  # Add fields here
+  version: 1.0.0
+  applicationImage: docker-registry.default.svc:5000/insurance-quote/quote-backend:v1
+  stack: java-spring-boot2
+  service:
+    type: NodePort
+    port: 8080
+    annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path: '/actuator/prometheus'
+  readinessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /actuator/health
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+  livenessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /actuator/liveness
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+  envFrom:
+    - configMapRef:
+        name: dacadoo-config
+  expose: true
+  createKnativeService: false
