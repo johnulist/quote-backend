@@ -75,7 +75,7 @@ public class Quote {
             HealthScoreResponse hsResponse = hsResponseEntity.getBody();
             score = hsResponse.getScr();
             if (hsResponse.getSubscores() != null) {
-                basis = "Dacadoo Health Score API is a thing! ";
+                basis = "Dacadoo Health Score API results: ";
             } else {
                 basis = "mocked backend computation";
             }
