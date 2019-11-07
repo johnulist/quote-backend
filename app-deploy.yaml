@@ -2,6 +2,7 @@ apiVersion: appsody.dev/v1beta1
 kind: AppsodyApplication
 metadata:
   name: quote-backend
+  namespace: insurance-quote
 spec:
   # Add fields here
   version: 1.0.0
